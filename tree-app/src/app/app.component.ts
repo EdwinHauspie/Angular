@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { TreeNode } from './models/treeNode';
 import { ApiService } from './services/api.service';
+import { say, input } from './util/Popup';
 
 @Component({
     selector: 'app-root',
@@ -30,6 +31,11 @@ export class AppComponent {
 
     collapseAll() {
         this.flatNodes.forEach(x => x.isOpen = false);
+    }
+
+    async sayHello() {
+        let answer = await input('Give an answer');
+        if (answer) say(`You said "${answer}"`);
     }
 
     async ngOnInit() {
