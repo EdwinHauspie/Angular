@@ -1,0 +1,35 @@
+button {
+    &.remove {
+        vertical-align: middle;
+        cursor: pointer;
+        border-radius: 2px;
+        width: 15px;
+        height: 15px;
+        position: relative;
+        border: 0;
+        background-color: white;
+
+        &:hover {
+            background-color: whitesmoke;
+        }
+
+        svg {
+            width: 8px;
+            height: 8px;
+            position: absolute;
+            left: 3px;
+            top: 3px;
+            opacity: .8;
+            transform: rotate(45deg);
+        }
+    }
+}
+
+span.badge {
+    font-size: 11px;
+    color: #0060df;
+
+    +span.badge {
+        margin-left: 16px;
+    }
+}

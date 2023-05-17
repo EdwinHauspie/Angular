@@ -1,0 +1,25 @@
+<li>
+    <div>
+        <button (click)="toggle()" [class]="{ 'hidden': !node.nodes?.length }">
+            <svg *ngIf="!node.isOpen" viewbox="0 0 8 8">
+                <line x1="4" y1="0" x2="4" y2="8" fill="none" stroke="black" stroke-width="1" />
+                <line x1="0" y1="4" x2="8" y2="4" fill="none" stroke="black" stroke-width="1" />
+            </svg>
+
+            <svg *ngIf="node.isOpen" viewbox="0 0 8 8">
+                <line x1="0" y1="4" x2="8" y2="4" fill="none" stroke="black" stroke-width="1" />
+            </svg>
+        </button>
+
+        <label [title]="node.title">
+            <input type="checkbox" [value]="node.id" [(ngModel)]="node.isSelected" />
+            <span>{{ node.title }}</span>
+        </label>
+
+        <em>{{ node.nodes?.length }}</em>
+    </div>
+
+    <ul *ngIf="node.nodes?.length && node.isOpen">
+        <tree-node *ngFor="let n of node.nodes" [node]="n"></tree-node>
+    </ul>
+</li>
