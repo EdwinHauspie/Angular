@@ -1,7 +1,11 @@
 export class TreeNode {
     id: number = 0;
-    title: string = '';
+    title: string = 'No title';
     isOpen: boolean = false;
     isSelected: boolean = false;
-    nodes: TreeNode[] | null = null;
+    nodes: TreeNode[] = [];
+
+    public constructor(objectInitializer?: Partial<TreeNode>) {
+        Object.assign(this, objectInitializer);
+    }
 }

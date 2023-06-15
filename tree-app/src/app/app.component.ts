@@ -25,6 +25,10 @@ export class AppComponent {
         this.apiService = apiService;
     }
 
+    async ngOnInit() {
+        this.nodes = await this.apiService.get();
+    }
+
     expandAll() {
         this.flatNodes.forEach(x => x.isOpen = true);
     }
@@ -33,12 +37,9 @@ export class AppComponent {
         this.flatNodes.forEach(x => x.isOpen = false);
     }
 
-    async sayHello() {
-        let answer = await input('Give an answer');
-        if (answer) say(`You said "${answer}"`);
-    }
-
-    async ngOnInit() {
-        this.nodes = await this.apiService.get();
+    async addNode() {
+        let nodeTitle = await input('Node title');
+        if (!nodeTitle) return;
+        this.nodes.push(new TreeNode({ title: nodeTitle }));
     }
 }
