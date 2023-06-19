@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { TreeNode } from './models/treeNode';
 import { ApiService } from './services/api.service';
 import { say, input } from './util/Popup';
@@ -8,7 +8,7 @@ import { say, input } from './util/Popup';
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
     title = 'tree-app';
     nodes: TreeNode[] = [];
     apiService: ApiService;
