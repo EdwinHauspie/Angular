@@ -1,45 +1,44 @@
 import { Component, OnInit } from '@angular/core';
 import { TreeNode } from './models/treeNode';
-import { ApiService } from './services/api.service';
+import { TreeService } from './services/tree.service';
 import { say, input } from './util/Popup';
 
 @Component({
-    selector: 'app-root',
-    templateUrl: './app.component.html',
-    styleUrls: ['./app.component.scss']
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-    title = 'tree-app';
-    nodes: TreeNode[] = [];
-    apiService: ApiService;
+  title = 'tree-app';
+  tree: TreeNode[] = [];
 
-    get flatNodes() {
-        return this.nodes.flatten(x => x.nodes);
-    }
+  get flatNodes() {
+    return this.tree.flatten(x => x.nodes);
+  }
 
-    get selectedNodes() {
-        return this.flatNodes.filter(x => x.isSelected);
-    }
+  get selectedNodes() {
+    return this.flatNodes.filter(x => x.isSelected);
+  }
 
-    constructor(apiService: ApiService) {
-        this.apiService = apiService;
-    }
+  constructor(private treeService: TreeService) { }
 
-    async ngOnInit() {
-        this.nodes = await this.apiService.get();
-    }
+  ngOnInit() {
+    this.treeService.tree.subscribe(x => this.tree = x);
+  }
 
-    expandAll() {
-        this.flatNodes.forEach(x => x.isOpen = true);
-    }
+  expandAll() {
+    this.flatNodes.forEach(x => x.isOpen = true);
+  }
 
-    collapseAll() {
-        this.flatNodes.forEach(x => x.isOpen = false);
-    }
+  collapseAll() {
+    this.flatNodes.forEach(x => x.isOpen = false);
+  }
 
-    async addNode() {
-        let nodeTitle = await input('Node title');
-        if (!nodeTitle) return;
-        this.nodes.push(new TreeNode({ title: nodeTitle }));
-    }
+  setNewTree() {
+    this.treeService.setNewTree([
+      new TreeNode({ title: 'Node A' }),
+      new TreeNode({ title: 'Node B' }),
+      new TreeNode({ title: 'Node C' })
+    ]);
+  }
 }

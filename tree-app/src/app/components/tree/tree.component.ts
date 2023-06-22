@@ -7,5 +7,5 @@ import { TreeNode } from 'src/app/models/treeNode';
   styleUrls: ['./tree.component.scss']
 })
 export class TreeComponent {
-  @Input() nodes: TreeNode[];
+  @Input() tree: TreeNode[];
 }
